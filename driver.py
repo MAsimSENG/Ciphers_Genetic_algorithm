@@ -1,3 +1,4 @@
 import cipher
 
-cipher.simpleShift(1)
+cipher.enigma_set_key('ABC');
+print(cipher.enigma_process("hello world"))
