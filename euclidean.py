@@ -20,8 +20,7 @@ import numpy as np
 """
 def euclideanDistance(knownText, decryptedText):
     distanceArray =[]
-
-
+    
     for knownLetter,decryptedLetter in zip(knownText,decryptedText):
 
         forward_dist = abs(ord(knownLetter) - ord(decryptedLetter))
@@ -44,11 +43,4 @@ def euclideanDistance(knownText, decryptedText):
     return  np.sqrt(np.sum(np.square(distanceArray)))
 
 
-def main():
 
-    distance = euclideanDistance("bbcz","abcd")
-
-    print(distance)
-
-if __name__ == "__main__":
-    main()
