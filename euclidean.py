@@ -15,8 +15,6 @@ import numpy as np
     Parameters:
     (string) knownText
     (string) decryptedText
-    (int ) distanceArray[]
-
 """
 def euclideanDistance(knownText, decryptedText):
     distanceArray =[]
