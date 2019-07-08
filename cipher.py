@@ -125,5 +125,5 @@ def intToCharASCII(letter):
 if __name__ == '__main__':
 	# encrypt('abcdef','abc')
 	# encrypt('abcdef',[1,2,3])
-	encrypt('xyz','abc')
-	decrypt('yac','abc')
+	# encrypt('xyz','abc')
+	# decrypt('yac','abc')
