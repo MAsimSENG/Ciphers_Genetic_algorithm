@@ -102,9 +102,12 @@ def encryptShiftLetter(letter, shift):
 	'''
 	Shifts a letter by the specified amount
 	'''
-	letter = charToIntASCII(letter)
-	letter += shift
-	letter = intToCharASCII(letter)
+	if(ord(letter) >= 65 or ord(letter) <= 90):
+		letter = letter.lower()
+	if(ord(letter) >= 97 and ord(letter) <= 122):
+		letter = charToIntASCII(letter)
+		letter += shift
+		letter = intToCharASCII(letter)
 	return letter
 
 def charToIntASCII(letter):
@@ -123,7 +126,8 @@ def intToCharASCII(letter):
 	return chr((letter % 26) + LETTER_SHIFT)
 
 if __name__ == '__main__':
-	# encrypt('abcdef','abc')
+	# encrypt('this is a test. What happens to * and ? and !','abc')
+	# encrypt('abc def',1)
 	# encrypt('abcdef',[1,2,3])
 	# encrypt('xyz','abc')
 	# decrypt('yac','abc')
