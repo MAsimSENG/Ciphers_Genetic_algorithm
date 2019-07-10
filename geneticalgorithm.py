@@ -16,21 +16,18 @@ def get_random_char():
 
 
 def crossover(parent1, parent2, crossover_location=0):
-
+    '''
+    This method takes two parents (strings) and returns two children (strings).
+    The children are a combination of the parents as long as the string length is greater than 1. When the string length = 1, the children are a copy of the parent.
+    '''
     if crossover_location == 0:
         crossover_location = int(len(parent1) / 2)
 
-    # TODO concatenate:
-    # parent1[0 to `crossover_location`]
-    # and
-    # parent2[`crossover_location` to the end of parent2]
-    child1 = 'TODO Child 1'
+    child1 = 'N/A'
+    child1 = parent1[:crossover_location] + parent2[crossover_location:len(parent2)]
 
-    # TODO concatenate:
-    # parent1[0 to `crossover_location`]
-    # and
-    # parent2[`crossover_location` to the end of parent2]
-    child2 = 'TODO Child 2'
+    child2 = 'N/A'
+    child2 = parent2[:crossover_location] + parent1[crossover_location:len(parent1)]
 
     return child1, child2
 
@@ -94,9 +91,12 @@ def run_genetic_algorithm(population,
         #
 
         # Selection
+        '''
+        TODO @Rafay
+        '''
         population = get_sorted(population)
-        parent1 = population[0][0]  # TODO get last gene in the list
-        parent2 = population[0][0]  # TODO get 2nd last gene in the list
+        parent1 = population[-1][0]  # TODO get last gene in the list
+        parent2 = population[-2][0]  # TODO get 2nd last gene in the list
         print()
         print('=== Parents for crossover ===')
         print(parent1)
@@ -107,7 +107,7 @@ def run_genetic_algorithm(population,
         # Crossover
         child1, child2 = crossover(parent1, parent2, crossover_location)
         print()
-        print('=== Cihldren from crossover ===')
+        print('=== Children from crossover ===')
         print(child1)
         print(child2)
 
