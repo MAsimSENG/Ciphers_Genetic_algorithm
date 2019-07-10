@@ -59,7 +59,11 @@ def mutate(chromosome, mutation_round=0):
     Parameters:
     chromosome                - String representation of the chromosome
     mutation_round      - Number of iterations to perform mutation
+    
+    # https://stackoverflow.com/questions/2165172/replacing-one-character-of-a-string-in-python
+    
     '''
+    
 
     chromosome = list(chromosome)
 
@@ -129,7 +133,7 @@ def run_genetic_algorithm(population,
 
         #
 
-        # Next generation. Replacing weakest chromos in the population
+        # Next generation. Replacing weakest chromosome in the population
         population[0] = [child1, 0]
         population[1] = [child2, 0]
         population[2] = [mutated_child, 0]
@@ -137,7 +141,7 @@ def run_genetic_algorithm(population,
         #
 
         print()
-        print('=== Population after repalcing weak chromos ===')
+        print('=== Population after repalcing weak chromosome ===')
         print_list_vertically(population)
 
         # Emulate do-wihle loop
