@@ -54,8 +54,6 @@ def intListDecrypt(text, key):
 	decrypted = ""
 	for letter, shift in zip(text, itertools.cycle(key)):
 		decrypted += decryptShiftLetter(letter,shift)
-	print(text) #TODO Remove this line
-	print(decrypted) #TODO Remove this line
 
 def intListEncrypt(text, key):
 	'''
@@ -64,8 +62,6 @@ def intListEncrypt(text, key):
 	encrypted = ""
 	for letter, shift in zip(text, itertools.cycle(key)):
 		encrypted += encryptShiftLetter(letter,shift)
-	print(text) #TODO Remove this line
-	print(encrypted) #TODO Remove this line
 
 def intDecrypt(text, key):
 	'''
@@ -75,8 +71,6 @@ def intDecrypt(text, key):
 	decrypted = ""
 	for letter in text:
 		decrypted += decryptShiftLetter(letter,shift)
-	print(text) #TODO Remove this line
-	print(decrypted) #TODO Remove this line
 
 def intEncrypt(text, key):
 	'''
@@ -102,7 +96,7 @@ def encryptShiftLetter(letter, shift):
 	'''
 	Shifts a letter by the specified amount
 	'''
-	if(ord(letter) >= 65 or ord(letter) <= 90):
+	if(ord(letter) >= 65 and ord(letter) <= 90):
 		letter = letter.lower()
 	if(ord(letter) >= 97 and ord(letter) <= 122):
 		letter = charToIntASCII(letter)
