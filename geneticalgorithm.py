@@ -41,36 +41,44 @@ def my_fitness_function(input):
 
 
 def calculate_fitness(population):
-    # TODO
-    # for each 'gene' in the 2D list of 'population':
-        # fitness = call the fitness function with gene
-        # store the value in gene[1]
 
+    for each individual in population:
+
+        fitness = my_fitness_function(individual)
+
+        individual[1] = fitness
+        
     return population
 
 
-def mutate(gene, mutation_round=0):
+def mutate(chromosome, mutation_round=0):
     '''
-    This function takes a gene and replaces random location with random char for
+    This function takes a chromosome and replaces random location with random char for
     `mutation_round` many times.
 
     Parameters:
-    gene                - String representation of the gene
+    chromosome                - String representation of the chromosome
     mutation_round      - Number of iterations to perform mutation
     '''
 
-    # https://stackoverflow.com/questions/2165172/replacing-one-character-of-a-string-in-python
-    # TODO (see the link ^^^) turn `gene` into a list s.t. we can manipulate individual chars.
-    mutated_gene = 'TODO Mutation'
-    for i in range(mutation_round):
-        pass  # TODO delete this when the loop is implemented
-        # TODO get random char. See `get_random_char` function
-        # TODO loc = get random location within the bound of the string length
-        # TODO repalce mutated_gene's `loc` position with the char attained by `get_random_char`
-    # TODO convert the list into string (''.join(...))
-    mutated_gene = 'TODO Mutation'
+    chromosome = list(chromosome)
 
-    return mutated_gene
+    mutated_chromosome = chromosome
+
+    chromosomeLength = len(chromosome)
+
+    for i in range(mutation_round):
+
+        c = get_random_char()
+
+        loc = random.randint(0, chromosomeLength-1)
+
+        mutated_chromosome[loc] = c
+
+
+    mutated_chromosome = ''.join(mutated_chromosome)
+
+    return mutated_chromosome
 
 
 def run_genetic_algorithm(population,
@@ -95,8 +103,8 @@ def run_genetic_algorithm(population,
 
         # Selection
         population = get_sorted(population)
-        parent1 = population[0][0]  # TODO get last gene in the list
-        parent2 = population[0][0]  # TODO get 2nd last gene in the list
+        parent1 = population[0][0]  # TODO get last chromosome in the list
+        parent2 = population[0][0]  # TODO get 2nd last chromosome in the list
         print()
         print('=== Parents for crossover ===')
         print(parent1)
@@ -116,12 +124,12 @@ def run_genetic_algorithm(population,
         # Mutation
         mutated_child = mutate(child1)
         print()
-        print('=== Mutated gene ===')
+        print('=== Mutated chromosome ===')
         print(child1)
 
         #
 
-        # Next generation. Replacing weakest genes in the population
+        # Next generation. Replacing weakest chromos in the population
         population[0] = [child1, 0]
         population[1] = [child2, 0]
         population[2] = [mutated_child, 0]
@@ -129,7 +137,7 @@ def run_genetic_algorithm(population,
         #
 
         print()
-        print('=== Population after repalcing weak genes ===')
+        print('=== Population after repalcing weak chromos ===')
         print_list_vertically(population)
 
         # Emulate do-wihle loop
