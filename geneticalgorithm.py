@@ -20,7 +20,7 @@ def crossover(parent1, parent2, crossover_location=0):
     This method takes two parents (strings) and returns two children (strings).
     The children are a combination of the parents as long as the string length is greater than 1. When the string length = 1, the children are a copy of the parent.
     '''
-    if crossover_location == 0:
+    if crossover_location == 0 or crossover_location > len(parent1):
         crossover_location = int(len(parent1) / 2)
 
     child1 = 'N/A'
@@ -91,9 +91,6 @@ def run_genetic_algorithm(population,
         #
 
         # Selection
-        '''
-        TODO @Rafay
-        '''
         population = get_sorted(population)
         parent1 = population[-1][0]  # TODO get last gene in the list
         parent2 = population[-2][0]  # TODO get 2nd last gene in the list
