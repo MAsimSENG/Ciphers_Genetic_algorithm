@@ -62,6 +62,7 @@ def intListEncrypt(text, key):
 	encrypted = ""
 	for letter, shift in zip(text, itertools.cycle(key)):
 		encrypted += encryptShiftLetter(letter,shift)
+	return encrypted
 
 def intDecrypt(text, key):
 	'''
@@ -72,6 +73,8 @@ def intDecrypt(text, key):
 	for letter in text:
 		decrypted += decryptShiftLetter(letter,shift)
 
+	return decrypted
+
 def intEncrypt(text, key):
 	'''
 	This method encrypts (shifts) the text by a constant amount for each letter
@@ -80,8 +83,8 @@ def intEncrypt(text, key):
 	encrypted = ""
 	for letter in text:
 		encrypted += encryptShiftLetter(letter,shift)
-	print(text) #TODO Remove this line
-	print(encrypted) #TODO Remove this line
+
+	return encrypted
 
 def decryptShiftLetter(letter, shift):
 	'''
@@ -119,9 +122,4 @@ def intToCharASCII(letter):
 	'''
 	return chr((letter % 26) + LETTER_SHIFT)
 
-if __name__ == '__main__':
-	# encrypt('this is a test. What happens to * and ? and !','abc')
-	# encrypt('abc def',1)
-	# encrypt('abcdef',[1,2,3])
-	# encrypt('xyz','abc')
-	# decrypt('yac','abc')
+	

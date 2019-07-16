@@ -2,6 +2,7 @@
 #!/usr/bin/env python3
 
 from math import*
+
 import numpy as np
 
 """A function to return the euclidean distance between two strings
@@ -16,9 +17,42 @@ import numpy as np
     (string) knownText
     (string) decryptedText
 """
-def euclideanDistance(knownText, decryptedText):
+
+
+def getDecryptedTextWithCurrentKey(key):
+
+    entireDecryptedString=""
+
+    encryptedFile = open("encrypted.txt", "w")
+
+    for line in encryptedFile:
+
+        entireDecryptedString+=cipher.decrypt(line,key)
+
+    return entireDecryptedString
+
+def getEntireKnownText():
+
+    entireKnownString=""
+
+    pfile = open("plain.txt", "r")
+
+    for line in pfile:
+
+        entireKnownString+=line
+
+    return entireKnownString
+
+
+
+def euclideanDistance(key):
+
+    knownText = getEntireKnownText()
+
+    decryptedText = getDecryptedTextWithCurrentKey(key)
+
     distanceArray =[]
-    
+
     for knownLetter,decryptedLetter in zip(knownText,decryptedText):
 
         forward_dist = abs(ord(knownLetter) - ord(decryptedLetter))
@@ -39,6 +73,3 @@ def euclideanDistance(knownText, decryptedText):
     distanceArray = np.array(distanceArray)
 
     return  np.sqrt(np.sum(np.square(distanceArray)))
-
-
-

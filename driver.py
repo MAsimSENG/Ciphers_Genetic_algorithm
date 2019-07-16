@@ -1,5 +1,8 @@
 import geneticalgorithm as ga
+import euclidean
+import cipher
 
+'''
 population = [
     ['aaaaaaaa', 0],
     ['bbbbbbbb', 0],
@@ -10,3 +13,25 @@ population = [
 ]
 
 population = ga.run_genetic_algorithm(population, mutation_round=2)
+
+'''
+
+def trial_run():
+    pfile = open("plain.txt", "r")
+    efile = open("encrypted.txt", "w")
+
+    for line in pfile:
+        singleEncryptedLine = cipher.strEncrypt(line)
+        efile.write(singleEncryptedLine)
+        
+    pfile.close()
+    efile.close()
+
+
+
+
+
+
+
+if __name__ == "__main__":
+    trial_run()

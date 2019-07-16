@@ -32,9 +32,9 @@ def crossover(parent1, parent2, crossover_location=0):
     return child1, child2
 
 
-def my_fitness_function(input):
-    # TODO @arshi update this when Euclidean distance is comleted
-    return random.randint(0, 9)
+def my_fitness_function(individual):
+
+    return euclideanDistance(individual)
 
 
 def calculate_fitness(population):
@@ -44,7 +44,7 @@ def calculate_fitness(population):
         fitness = my_fitness_function(individual)
 
         individual[1] = fitness
-        
+
     return population
 
 
@@ -56,11 +56,11 @@ def mutate(chromosome, mutation_round=0):
     Parameters:
     chromosome                - String representation of the chromosome
     mutation_round      - Number of iterations to perform mutation
-    
+
     # https://stackoverflow.com/questions/2165172/replacing-one-character-of-a-string-in-python
-    
+
     '''
-    
+
 
     chromosome = list(chromosome)
 
