@@ -4,14 +4,18 @@
 from math import*
 
 import numpy as np
+import cipher
 
-"""A function to return the euclidean distance between two strings
+"""
+    A function to return the euclidean distance between two strings
 
     ## the longest distance from one point to another is 13 (ie a-n)
     ## Consider the example for forward distance larger than 13 :
-    ex:  a-o = 14,
+    ## ex:  a-o = 14,
     ## 14>13 --> how_much_back = 14-13 =1
     ## back_distance = 13 - how_much_back = 12
+
+    key is equivalent to individual
 
     Parameters:
     (string) knownText
@@ -21,14 +25,15 @@ import numpy as np
 
 def getDecryptedTextWithCurrentKey(key):
 
-    entireDecryptedString=""
+    entireDecryptedString=" "
 
-    encryptedFile = open("encrypted.txt", "w")
+    encryptedFile = open("encrypted.txt", "r")
 
     for line in encryptedFile:
 
         entireDecryptedString+=cipher.decrypt(line,key)
 
+    encryptedFile.close()
     return entireDecryptedString
 
 def getEntireKnownText():
@@ -49,7 +54,7 @@ def euclideanDistance(key):
 
     knownText = getEntireKnownText()
 
-    decryptedText = getDecryptedTextWithCurrentKey(key)
+    decryptedText = getDecryptedTextWithCurrentKey(key[0])
 
     distanceArray =[]
 

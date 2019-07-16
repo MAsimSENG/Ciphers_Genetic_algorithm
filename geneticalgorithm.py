@@ -1,5 +1,6 @@
 import random
-
+import cipher
+import euclidean
 
 def print_list_vertically(list):
     for item in list:
@@ -31,15 +32,23 @@ def crossover(parent1, parent2, crossover_location=0):
 
     return child1, child2
 
+'''
+
+    Returns the fitness of an individual
+
+'''
 
 def my_fitness_function(individual):
 
-    return euclideanDistance(individual)
+    return euclidean.euclideanDistance(individual)
 
+'''
+    returns the fitness of the entire populations as a 2d list
 
+'''
 def calculate_fitness(population):
 
-    for each individual in population:
+    for individual in population:
 
         fitness = my_fitness_function(individual)
 
@@ -92,8 +101,9 @@ def run_genetic_algorithm(population,
 
     # Emulate do-wihle loop
     # https://coderwall.com/p/q_rd1q/emulate-do-while-loop-in-python
-    while True:
-
+    x=0
+    while x<100:
+        x+=1
         # Calculate fitness
         population = calculate_fitness(population)
         print()
@@ -104,8 +114,8 @@ def run_genetic_algorithm(population,
 
         # Selection
         population = get_sorted(population)
-        parent1 = population[-1][0]  # get last gene in the list
-        parent2 = population[-2][0]  # get 2nd last gene in the list
+        parent1 = population[-1][0]  # get last chromosome in the list
+        parent2 = population[-2][0]  # get 2nd last chromosome in the list
 
         print()
         print('=== Parents for crossover ===')
@@ -144,7 +154,6 @@ def run_genetic_algorithm(population,
 
         # Emulate do-wihle loop
         # TODO @arshi write the actual break conditions when more pieces are in place
-        if True:
-            break
+
 
     return population

@@ -8,35 +8,44 @@ def decrypt(text, key):
 	This method determines the type of key (either int, string or list) and calls the necessary function to decrypt the text.
 	'''
 	if(type(key) == int):
-		intDecrypt(text, key)
+		text_to_return=intDecrypt(text, key)
 	elif(type(key) == str):
-		strDecrypt(text,key)
+		text_to_return=strDecrypt(text,key)
 	elif(type(key) == list):
-		intListDecrypt(text, key)
+		text_to_return=intListDecrypt(text, key)
 	else:
 		print ('Not supported')
-
+	return text_to_return
 def encrypt(text, key):
 	'''
 	This method determines the type of key (either int, string or list) and calls the necessary function to encrypt the text.
 	'''
 	if(type(key) == int):
-		intEncrypt(text, key)
+		text_to_return = intEncrypt(text, key)
+		return 	text_to_return
+
 	elif(type(key) == str):
-		strEncrypt(text,key)
+		text_to_return = strEncrypt(text,key)
+		return 	text_to_return
+
 	elif(type(key) == list):
-		intListEncrypt(text, key)
+		text_to_return = intListEncrypt(text, key)
+		return 	text_to_return
+
 	else:
 		print ('Not supported')
+	return 	text_to_return
 
 def strDecrypt(text, key):
 	'''
-	This method encrypts (shifts) the text by iterating through a string. For this method when the chars are converted into ints, they are increased by +1 to convert a=0 to a=1, b=1 to b=2...(This is only done when LETTER_SHIFT = 97)
+	This method decrypts (shifts) the text by iterating through a string. For this method when the chars are converted into ints, they are increased by +1 to convert a=0 to a=1, b=1 to b=2...(This is only done when LETTER_SHIFT = 97)
 	'''
 	intKeyList = []
 	for letter, i in zip(key, itertools.count(0,1)):
 		intKeyList.append(charToIntASCII(letter) + 1)
-	intListDecrypt(text,intKeyList)
+
+	text_to_return = intListDecrypt(text,intKeyList)
+	return text_to_return
 
 def strEncrypt(text, key):
 	'''
@@ -45,7 +54,10 @@ def strEncrypt(text, key):
 	intKeyList = []
 	for letter, i in zip(key, itertools.count(0,1)):
 		intKeyList.append(charToIntASCII(letter) + 1)
-	intListEncrypt(text,intKeyList)
+
+	text_to_return = intListEncrypt(text,intKeyList)
+
+	return text_to_return
 
 def intListDecrypt(text, key):
 	'''
@@ -54,6 +66,8 @@ def intListDecrypt(text, key):
 	decrypted = ""
 	for letter, shift in zip(text, itertools.cycle(key)):
 		decrypted += decryptShiftLetter(letter,shift)
+
+	return decrypted
 
 def intListEncrypt(text, key):
 	'''
@@ -90,6 +104,7 @@ def decryptShiftLetter(letter, shift):
 	'''
 	Shifts a letter by the specified amount
 	'''
+
 	letter = charToIntASCII(letter)
 	letter -= shift
 	letter = intToCharASCII(letter)
@@ -121,5 +136,3 @@ def intToCharASCII(letter):
 	Shift letters a=97,b=98,c=99...z=122
 	'''
 	return chr((letter % 26) + LETTER_SHIFT)
-
-	
