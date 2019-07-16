@@ -9,6 +9,7 @@ def print_list_vertically(list):
 
 def get_sorted(list):
     # https://stackoverflow.com/questions/20183069/how-to-sort-multidimensional-array-by-column
+    print("chcek this")
     return sorted(list, key=lambda x: x[1],reverse = True)
 
 
@@ -16,7 +17,7 @@ def get_random_char():
     return chr(random.randint(97, 122))
 
 
-def crossover(parent1, parent2, crossover_location=0):
+def crossover(parent1, parent2, crossover_location=random.randint(2,6)):
     '''
     This method takes two parents (strings) and returns two children (strings).
     The children are a combination of the parents as long as the string length is greater than 1. When the string length = 1, the children are a copy of the parent.
@@ -40,7 +41,9 @@ def crossover(parent1, parent2, crossover_location=0):
 
 def my_fitness_function(individual):
 
-    return 1/euclidean.euclideanDistance(individual)
+    distance = euclidean.euclideanDistance(individual)
+
+    return distance
 
 '''
     returns the fitness of the entire populations as a 2d list
@@ -57,7 +60,7 @@ def calculate_fitness(population):
     return population
 
 
-def mutate(chromosome, mutation_round=0):
+def mutate(chromosome, mutation_round=2):
     '''
     This function takes a chromosome and replaces random location with random char for
     `mutation_round` many times.
@@ -92,8 +95,8 @@ def mutate(chromosome, mutation_round=0):
 
 
 def run_genetic_algorithm(population,
-                          crossover_location=0,
-                          mutation_round=0):
+                          crossover_location=4,
+                          mutation_round=4):
 
     print()
     print('=== Initial population ===')
@@ -102,7 +105,7 @@ def run_genetic_algorithm(population,
     # Emulate do-wihle loop
     # https://coderwall.com/p/q_rd1q/emulate-do-while-loop-in-python
     x=0
-    while x<100:
+    while x<20000:
         x+=1
         # Calculate fitness
         population = calculate_fitness(population)

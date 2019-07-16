@@ -12,12 +12,12 @@ population = [
     ['ffffffff', 0],
 ]
 
-population = ga.run_genetic_algorithm(population, mutation_round=2)
+population = ga.run_genetic_algorithm(population, mutation_round=4)
 
 '''
 
 def trial_run():
-    key = "abcd"
+    key = "aaaaaabb"
     population = [
         ['aaaaaaaa', 0],
         ['bbbbbbbb', 0],
@@ -36,7 +36,7 @@ def trial_run():
     pfile.close()
     efile.close()
 
-    population = ga.run_genetic_algorithm(population, mutation_round=2)
+    population = ga.run_genetic_algorithm(population, mutation_round=10)
 
 
 
