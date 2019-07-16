@@ -9,7 +9,7 @@ def print_list_vertically(list):
 
 def get_sorted(list):
     # https://stackoverflow.com/questions/20183069/how-to-sort-multidimensional-array-by-column
-    return sorted(list, key=lambda x: x[1])
+    return sorted(list, key=lambda x: x[1],reverse = True)
 
 
 def get_random_char():
@@ -40,7 +40,7 @@ def crossover(parent1, parent2, crossover_location=0):
 
 def my_fitness_function(individual):
 
-    return euclidean.euclideanDistance(individual)
+    return 1/euclidean.euclideanDistance(individual)
 
 '''
     returns the fitness of the entire populations as a 2d list
