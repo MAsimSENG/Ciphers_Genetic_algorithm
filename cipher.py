@@ -104,10 +104,10 @@ def decryptShiftLetter(letter, shift):
 	'''
 	Shifts a letter by the specified amount
 	'''
-
-	letter = charToIntASCII(letter)
-	letter -= shift
-	letter = intToCharASCII(letter)
+	if(ord(letter) >= 97 and ord(letter) <= 122):
+		letter = charToIntASCII(letter)
+		letter -= shift
+		letter = intToCharASCII(letter)
 	return letter
 
 def encryptShiftLetter(letter, shift):

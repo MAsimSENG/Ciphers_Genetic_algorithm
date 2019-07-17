@@ -25,7 +25,7 @@ import cipher
 
 def getDecryptedTextWithCurrentKey(key):
 
-    entireDecryptedString=" "
+    entireDecryptedString=""
 
     encryptedFile = open("encrypted.txt", "r")
 
@@ -43,8 +43,9 @@ def getEntireKnownText():
     pfile = open("plain.txt", "r")
 
     for line in pfile:
-
-        entireKnownString+=line
+        for letter in line:
+            letter = letter.lower()
+            entireKnownString+=letter
 
     return entireKnownString
 
@@ -55,7 +56,6 @@ def euclideanDistance(key):
     knownText = getEntireKnownText()
 
     decryptedText = getDecryptedTextWithCurrentKey(key[0])
-
     distanceArray =[]
 
     for knownLetter,decryptedLetter in zip(knownText,decryptedText):

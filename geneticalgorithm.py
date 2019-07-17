@@ -2,6 +2,8 @@ import random
 import cipher
 import euclidean
 
+# Constant
+NEW = -1
 def print_list_vertically(list):
     for item in list:
         print(item)
@@ -94,6 +96,20 @@ def mutate(chromosome, mutation_round=2):
     return mutated_chromosome
 
 
+def calc_exit(population):
+    '''
+        checks the exit condition
+
+    '''
+    for individual in population:
+
+        fitness = individual[1]
+        if fitness ==0:
+            return False
+
+    return True
+
+
 def run_genetic_algorithm(population,
                           crossover_location=4,
                           mutation_round=4):
@@ -105,8 +121,10 @@ def run_genetic_algorithm(population,
     # Emulate do-wihle loop
     # https://coderwall.com/p/q_rd1q/emulate-do-while-loop-in-python
     x=0
-    while x<20000:
+    while (calc_exit(population) == True):
         x+=1
+        print("Iteration #",x)
+
         # Calculate fitness
         population = calculate_fitness(population)
         print()
@@ -145,11 +163,12 @@ def run_genetic_algorithm(population,
         #
 
         # Next generation. Replacing weakest chromosome in the population
-        population[0] = [child1, 0]
-        population[1] = [child2, 0]
-        population[2] = [mutated_child, 0]
+        population[0] = [child1, NEW]
+        population[1] = [child2, NEW]
+        population[2] = [mutated_child, NEW]
 
         #
+
 
         print()
         print('=== Population after repalcing weak chromosome ===')

@@ -17,14 +17,14 @@ population = ga.run_genetic_algorithm(population, mutation_round=4)
 '''
 
 def trial_run():
-    key = "aaaaaabb"
+    key = "quacktim"
     population = [
-        ['aaaaaaaa', 0],
-        ['bbbbbbbb', 0],
-        ['cccccccc', 0],
-        ['dddddddd', 0],
-        ['eeeeeeee', 0],
-        ['ffffffff', 0],
+        ['aaaaaaaa', -1],
+        ['bbbbbbbb', -1],
+        ['cccccccc', -1],
+        ['dddddddd', -1],
+        ['eeeeeeee', -1],
+        ['ffffffff', -1],
     ]
     pfile = open("plain.txt", "r")
     efile = open("encrypted.txt", "w")
