@@ -97,21 +97,21 @@ def run_genetic_algorithm(*,
 
     # Emulate do-wihle loop
     # https://coderwall.com/p/q_rd1q/emulate-do-while-loop-in-python
-    x = 0
+    loop_counter = 0
     while (calc_exit(population) == True):
-        x += 1
-        print("Iteration:", x, "Fitness:", population[-1][1])
+        loop_counter += 1
+        print("Iteration:", loop_counter, "Best Fitness:", population[-1][1])
 
         # Calculate fitness
         population = calculate_fitness(population, fitness_function)
+        population = get_sorted(population)
         print()
-        print('=== After fitness calculation ===')
+        print('=== After fitness calculation and sort ===')
         print_list_vertically(population)
 
         #
 
         # Selection
-        population = get_sorted(population)
         parent1 = population[-1][0]  # get last chromosome in the list
         parent2 = population[-2][0]  # get 2nd last chromosome in the list
         print()
