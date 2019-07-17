@@ -1,7 +1,5 @@
 #!/usr/bin/env python3
 
-from math import*
-
 import numpy as np
 import cipher
 
