@@ -36,8 +36,9 @@ def trial_run():
     pfile.close()
     efile.close()
 
-    population = ga.run_genetic_algorithm(population, mutation_round=10)
-
+    population = ga.run_genetic_algorithm(population=population,
+                                          crossover_location=4,
+                                          mutation_round=10)
 
 
 

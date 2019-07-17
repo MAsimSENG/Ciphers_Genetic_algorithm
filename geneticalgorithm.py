@@ -20,7 +20,7 @@ def get_random_char():
     return chr(random.randint(97, 122))
 
 
-def crossover(parent1, parent2, crossover_location=random.randint(2, 6)):
+def crossover(parent1, parent2, crossover_location=0):
     '''
     This method takes two parents (strings) and returns two children (strings).
     The children are a combination of the parents as long as the string length
@@ -98,9 +98,10 @@ def calc_exit(population):
     return True
 
 
-def run_genetic_algorithm(population,
-                          crossover_location=4,
-                          mutation_round=4):
+def run_genetic_algorithm(*,
+                          population,
+                          crossover_location,
+                          mutation_round):
 
     print()
     print('=== Initial population ===')
@@ -142,7 +143,7 @@ def run_genetic_algorithm(population,
         #
 
         # Mutation
-        mutated_child = mutate(child1)
+        mutated_child = mutate(child1, mutation_round)
         print()
         print('=== Mutated chromosome ===')
         print(child1)
