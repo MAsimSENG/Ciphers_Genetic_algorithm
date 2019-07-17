@@ -16,6 +16,7 @@ def decrypt(text, key):
 	else:
 		print ('Not supported')
 	return text_to_return
+
 def encrypt(text, key):
 	'''
 	This method determines the type of key (either int, string or list) and calls the necessary function to encrypt the text.
