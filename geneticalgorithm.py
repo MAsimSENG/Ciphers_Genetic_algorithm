@@ -71,13 +71,10 @@ def mutate(chromosome, mutation_round=2):
     # https://stackoverflow.com/questions/2165172/replacing-one-character-of-a-string-in-python
     '''
 
-    chromosome = list(chromosome)
-    mutated_chromosome = chromosome
-    chromosomeLength = len(chromosome)
-
+    mutated_chromosome = list(chromosome)
     for i in range(mutation_round):
         c = get_random_char()
-        loc = random.randint(0, chromosomeLength - 1)
+        loc = random.randint(0, len(chromosome) - 1)
         mutated_chromosome[loc] = c
 
     mutated_chromosome = ''.join(mutated_chromosome)
@@ -146,7 +143,7 @@ def run_genetic_algorithm(*,
         mutated_child = mutate(child1, mutation_round)
         print()
         print('=== Mutated chromosome ===')
-        print(child1)
+        print(mutated_child)
 
         #
 
