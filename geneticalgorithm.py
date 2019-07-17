@@ -4,6 +4,8 @@ import euclidean
 
 # Constant
 NEW = -1
+
+
 def print_list_vertically(list):
     for item in list:
         print(item)
@@ -11,52 +13,49 @@ def print_list_vertically(list):
 
 def get_sorted(list):
     # https://stackoverflow.com/questions/20183069/how-to-sort-multidimensional-array-by-column
-    print("chcek this")
-    return sorted(list, key=lambda x: x[1],reverse = True)
+    return sorted(list, key=lambda x: x[1], reverse=True)
 
 
 def get_random_char():
     return chr(random.randint(97, 122))
 
 
-def crossover(parent1, parent2, crossover_location=random.randint(2,6)):
+def crossover(parent1, parent2, crossover_location=random.randint(2, 6)):
     '''
     This method takes two parents (strings) and returns two children (strings).
-    The children are a combination of the parents as long as the string length is greater than 1. When the string length = 1, the children are a copy of the parent.
+    The children are a combination of the parents as long as the string length
+    is greater than 1. When the string length = 1, the children are a copy of
+    the parent.
     '''
     if crossover_location == 0 or crossover_location > len(parent1):
         crossover_location = int(len(parent1) / 2)
 
     child1 = 'N/A'
-    child1 = parent1[:crossover_location] + parent2[crossover_location:len(parent2)]
+    child1 = parent1[:crossover_location] + \
+        parent2[crossover_location:len(parent2)]
 
     child2 = 'N/A'
-    child2 = parent2[:crossover_location] + parent1[crossover_location:len(parent1)]
+    child2 = parent2[:crossover_location] + \
+        parent1[crossover_location:len(parent1)]
 
     return child1, child2
 
-'''
-
-    Returns the fitness of an individual
-
-'''
 
 def my_fitness_function(individual):
+    '''
+    Returns the fitness of an individual
+    '''
 
-    distance = euclidean.euclideanDistance(individual)
+    return euclidean.euclideanDistance(individual)
 
-    return distance
 
-'''
-    returns the fitness of the entire populations as a 2d list
-
-'''
 def calculate_fitness(population):
+    '''
+    Returns the fitness of the entire populations as a 2d list
+    '''
 
     for individual in population:
-
         fitness = my_fitness_function(individual)
-
         individual[1] = fitness
 
     return population
@@ -64,32 +63,24 @@ def calculate_fitness(population):
 
 def mutate(chromosome, mutation_round=2):
     '''
-    This function takes a chromosome and replaces random location with random char for
-    `mutation_round` many times.
+    This function takes a chromosome and replaces random location with random
+    char for `mutation_round` many times.
 
     Parameters:
-    chromosome                - String representation of the chromosome
+    chromosome          - String representation of the chromosome
     mutation_round      - Number of iterations to perform mutation
 
     # https://stackoverflow.com/questions/2165172/replacing-one-character-of-a-string-in-python
-
     '''
 
-
     chromosome = list(chromosome)
-
     mutated_chromosome = chromosome
-
     chromosomeLength = len(chromosome)
 
     for i in range(mutation_round):
-
         c = get_random_char()
-
-        loc = random.randint(0, chromosomeLength-1)
-
+        loc = random.randint(0, chromosomeLength - 1)
         mutated_chromosome[loc] = c
-
 
     mutated_chromosome = ''.join(mutated_chromosome)
 
@@ -98,13 +89,12 @@ def mutate(chromosome, mutation_round=2):
 
 def calc_exit(population):
     '''
-        checks the exit condition
-
+    Checks the exit condition
     '''
-    for individual in population:
 
+    for individual in population:
         fitness = individual[1]
-        if fitness ==0:
+        if fitness == 0:
             return False
 
     return True
@@ -120,10 +110,10 @@ def run_genetic_algorithm(population,
 
     # Emulate do-wihle loop
     # https://coderwall.com/p/q_rd1q/emulate-do-while-loop-in-python
-    x=0
+    x = 0
     while (calc_exit(population) == True):
-        x+=1
-        print("Iteration #",x)
+        x += 1
+        print("Iteration #", x)
 
         # Calculate fitness
         population = calculate_fitness(population)
@@ -137,7 +127,6 @@ def run_genetic_algorithm(population,
         population = get_sorted(population)
         parent1 = population[-1][0]  # get last chromosome in the list
         parent2 = population[-2][0]  # get 2nd last chromosome in the list
-
         print()
         print('=== Parents for crossover ===')
         print(parent1)
@@ -169,13 +158,8 @@ def run_genetic_algorithm(population,
 
         #
 
-
         print()
         print('=== Population after repalcing weak chromosome ===')
         print_list_vertically(population)
-
-        # Emulate do-wihle loop
-        # TODO @arshi write the actual break conditions when more pieces are in place
-
 
     return population
