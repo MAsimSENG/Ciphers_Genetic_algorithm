@@ -1,7 +1,7 @@
 import random
 
 # Constant
-NEW = -1
+FITNESS_OF_NEW_CHROMOSOME = -1
 
 
 def print_list_vertically(list):
@@ -139,9 +139,9 @@ def run_genetic_algorithm(*,
         #
 
         # Next generation. Replacing weakest chromosome in the population
-        population[0] = [child1, NEW]
-        population[1] = [child2, NEW]
-        population[2] = [mutated_child, NEW]
+        population[0] = [child1, FITNESS_OF_NEW_CHROMOSOME]
+        population[1] = [child2, FITNESS_OF_NEW_CHROMOSOME]
+        population[2] = [mutated_child, FITNESS_OF_NEW_CHROMOSOME]
 
         #
 
