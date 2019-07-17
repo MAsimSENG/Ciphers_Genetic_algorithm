@@ -1,6 +1,4 @@
 import random
-import cipher
-import euclidean
 
 # Constant
 NEW = -1
@@ -39,21 +37,13 @@ def crossover(parent1, parent2, crossover_location=0):
     return child1, child2
 
 
-def my_fitness_function(individual):
-    '''
-    Returns the fitness of an individual
-    '''
-
-    return euclidean.euclideanDistance(individual)
-
-
-def calculate_fitness(population):
+def calculate_fitness(population, fitness_function):
     '''
     Returns the fitness of the entire populations as a 2d list
     '''
 
     for individual in population:
-        fitness = my_fitness_function(individual)
+        fitness = fitness_function(individual)
         individual[1] = fitness
 
     return population
@@ -97,6 +87,7 @@ def calc_exit(population):
 
 def run_genetic_algorithm(*,
                           population,
+                          fitness_function,
                           crossover_location,
                           mutation_round):
 
@@ -109,10 +100,10 @@ def run_genetic_algorithm(*,
     x = 0
     while (calc_exit(population) == True):
         x += 1
-        print("Iteration #", x)
+        print("Iteration:", x, "Fitness:", population[-1][1])
 
         # Calculate fitness
-        population = calculate_fitness(population)
+        population = calculate_fitness(population, fitness_function)
         print()
         print('=== After fitness calculation ===')
         print_list_vertically(population)

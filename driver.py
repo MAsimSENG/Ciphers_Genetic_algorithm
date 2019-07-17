@@ -1,5 +1,5 @@
 import geneticalgorithm as ga
-import euclidean
+import euclidean as euclid
 import cipher
 
 '''
@@ -37,9 +37,11 @@ def trial_run():
     efile.close()
 
     population = ga.run_genetic_algorithm(population=population,
+                                          fitness_function=euclid.euclideanDistance,
                                           crossover_location=4,
                                           mutation_round=10)
 
+    print(population)
 
 
 
