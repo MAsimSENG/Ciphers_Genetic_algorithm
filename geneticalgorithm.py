@@ -30,11 +30,9 @@ def crossover(parent1, parent2, crossover_location=random.randint(2, 6)):
     if crossover_location == 0 or crossover_location > len(parent1):
         crossover_location = int(len(parent1) / 2)
 
-    child1 = 'N/A'
     child1 = parent1[:crossover_location] + \
         parent2[crossover_location:len(parent2)]
 
-    child2 = 'N/A'
     child2 = parent2[:crossover_location] + \
         parent1[crossover_location:len(parent1)]
 
