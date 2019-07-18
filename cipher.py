@@ -67,7 +67,6 @@ def intListDecrypt(text, key):
     decrypted = ""
     for letter, shift in zip(text, itertools.cycle(key)):
         decrypted += decryptShiftLetter(letter,shift)
-    print(decrypted)
 
     return decrypted
 
