@@ -4,30 +4,7 @@ import numpy as np
 import cipher
 
 
-def getDecryptedTextWithCurrentKey(key):
-    entireDecryptedString = ""
-    encryptedFile = open("encrypted.txt", "r")
-
-    for line in encryptedFile:
-        entireDecryptedString += cipher.decrypt(line, key)
-
-    encryptedFile.close()
-    return entireDecryptedString
-
-
-def getEntireKnownText():
-    entireKnownString = ""
-    pfile = open("plain.txt", "r")
-
-    for line in pfile:
-        for letter in line:
-            letter = letter.lower()
-            entireKnownString += letter
-
-    return entireKnownString
-
-
-def euclideanDistance(key):
+def euclideanDistance(know_text, decrypted_text):
     """
     A function to return the euclidean distance between two strings
 
@@ -44,12 +21,9 @@ def euclideanDistance(key):
     (string) decryptedText
     """
 
-    knownText = getEntireKnownText()
-
-    decryptedText = getDecryptedTextWithCurrentKey(key[0])
     distanceArray = []
 
-    for knownLetter, decryptedLetter in zip(knownText, decryptedText):
+    for knownLetter, decryptedLetter in zip(know_text, decrypted_text):
         forward_dist = abs(ord(knownLetter) - ord(decryptedLetter))
 
         if(forward_dist > 13):

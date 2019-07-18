@@ -37,18 +37,6 @@ def crossover(parent1, parent2, crossover_location=0):
     return child1, child2
 
 
-def calculate_fitness(population, fitness_function):
-    '''
-    Returns the fitness of the entire populations as a 2d list
-    '''
-
-    for individual in population:
-        fitness = fitness_function(individual)
-        individual[1] = fitness
-
-    return population
-
-
 def mutate(chromosome, mutation_round=2):
     '''
     This function takes a chromosome and replaces random location with random
@@ -86,55 +74,70 @@ def calc_exit(population):
 
 
 def run_genetic_algorithm(*,
+                          plain_text,
+                          encrypted_text,
+                          decrypt_function,
                           population,
                           fitness_function,
                           crossover_location,
-                          mutation_round):
+                          mutation_round,
+                          verbose=False):
 
-    print()
-    print('=== Initial population ===')
-    print_list_vertically(population)
+    if verbose:
+        print()
+        print('=== Initial population ===')
+        print_list_vertically(population)
 
     # Emulate do-wihle loop
     # https://coderwall.com/p/q_rd1q/emulate-do-while-loop-in-python
     loop_counter = 0
     while (calc_exit(population) == True):
         loop_counter += 1
-        print("Iteration:", loop_counter, "Best Fitness:", population[-1][1])
 
         # Calculate fitness
-        population = calculate_fitness(population, fitness_function)
+        for individual in population:
+            key_guess = individual[0]
+            decrypted_text_guess = decrypt_function(encrypted_text, key_guess)
+            fitness = fitness_function(plain_text, decrypted_text_guess)
+            individual[1] = fitness
+
+        #
+
         population = get_sorted(population)
-        print()
-        print('=== After fitness calculation and sort ===')
-        print_list_vertically(population)
+        if verbose:
+            print()
+            print('=== After fitness calculation and sort ===')
+            print_list_vertically(population)
 
         #
 
         # Selection
         parent1 = population[-1][0]  # get last chromosome in the list
         parent2 = population[-2][0]  # get 2nd last chromosome in the list
-        print()
-        print('=== Parents for crossover ===')
-        print(parent1)
-        print(parent2)
+        if verbose:
+            print()
+            print('=== Parents for crossover ===')
+            print(parent1)
+            print(parent2)
 
         #
 
         # Crossover
         child1, child2 = crossover(parent1, parent2, crossover_location)
-        print()
-        print('=== Children from crossover ===')
-        print(child1)
-        print(child2)
+        if verbose:
+            print()
+            print('=== Children from crossover ===')
+            print(child1)
+            print(child2)
 
         #
 
         # Mutation
         mutated_child = mutate(child1, mutation_round)
-        print()
-        print('=== Mutated chromosome ===')
-        print(mutated_child)
+        if verbose:
+            print()
+            print('=== Mutated chromosome ===')
+            print(mutated_child)
 
         #
 
@@ -145,8 +148,18 @@ def run_genetic_algorithm(*,
 
         #
 
-        print()
-        print('=== Population after repalcing weak chromosome ===')
-        print_list_vertically(population)
+        if verbose:
+            print()
+            print('=== Population after repalcing weak chromosome ===')
+            print_list_vertically(population)
 
-    return population
+        #
+
+        print("Iteration:", loop_counter, "Best Fitness:", population[-1][1])
+
+        #
+
+    # After the loop. I.e. break condition met.
+    found_key = population[-1][0]  # Last chromosome in population
+
+    return found_key

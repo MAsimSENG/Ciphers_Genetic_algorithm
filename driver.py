@@ -1,23 +1,15 @@
-import geneticalgorithm as ga
-import euclidean as euclid
 import cipher
+import euclidean as euclid
+import geneticalgorithm as ga
+import random
 
-'''
-population = [
-    ['aaaaaaaa', 0],
-    ['bbbbbbbb', 0],
-    ['cccccccc', 0],
-    ['dddddddd', 0],
-    ['eeeeeeee', 0],
-    ['ffffffff', 0],
-]
-
-population = ga.run_genetic_algorithm(population, mutation_round=4)
-
-'''
 
 def trial_run():
+
+    plain_text = "this is some plain text"
     key = "quacktim"
+    encrypted_text = cipher.encrypt(plain_text, key)
+
     population = [
         ['aaaaaaaa', -1],
         ['bbbbbbbb', -1],
@@ -26,26 +18,19 @@ def trial_run():
         ['eeeeeeee', -1],
         ['ffffffff', -1],
     ]
-    pfile = open("plain.txt", "r")
-    efile = open("encrypted.txt", "w")
 
+    found_key = ga.run_genetic_algorithm(plain_text=plain_text,
+                                         encrypted_text=encrypted_text,
+                                         decrypt_function=cipher.decrypt,
+                                         population=population,
+                                         fitness_function=euclid.euclideanDistance,
+                                         crossover_location=random.randint(0, 8),
+                                         # crossover_location=4,
+                                         mutation_round=4,
+                                         # verbose=True
+                                         )
 
-    for line in pfile:
-        singleEncryptedLine = cipher.encrypt(line,key)
-        efile.write(singleEncryptedLine)
-    pfile.close()
-    efile.close()
-
-    population = ga.run_genetic_algorithm(population=population,
-                                          fitness_function=euclid.euclideanDistance,
-                                          crossover_location=4,
-                                          mutation_round=10)
-
-    print(population)
-
-
-
-
+    print("Key:", found_key)
 
 
 if __name__ == "__main__":
