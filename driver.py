@@ -24,10 +24,7 @@ def trial_run():
                                          decrypt_function=cipher.decrypt,
                                          population=population,
                                          fitness_function=euclid.euclideanDistance,
-                                         crossover_location=random.randint(0, 8),
-                                         # crossover_location=4,
-                                         mutation_round=4,
-                                         # verbose=True
+                                         # verbose=True  # Uncomment this for more output
                                          )
 
     print("Key:", found_key)

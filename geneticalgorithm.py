@@ -18,7 +18,7 @@ def get_random_char():
     return chr(random.randint(97, 122))
 
 
-def crossover(parent1, parent2, crossover_location=0):
+def crossover_single_point(parent1, parent2, crossover_location=0):
     '''
     This method takes two parents (strings) and returns two children (strings).
     The children are a combination of the parents as long as the string length
@@ -35,6 +35,11 @@ def crossover(parent1, parent2, crossover_location=0):
         parent1[crossover_location:len(parent1)]
 
     return child1, child2
+
+
+def crossover_k_point(parent1, parent2):
+    # TODO @rafay. Feel free to change the name, arguments, etc.
+    return None
 
 
 def mutate(chromosome, mutation_round=2):
@@ -79,8 +84,6 @@ def run_genetic_algorithm(*,
                           decrypt_function,
                           population,
                           fitness_function,
-                          crossover_location,
-                          mutation_round,
                           verbose=False):
 
     if verbose:
@@ -88,11 +91,15 @@ def run_genetic_algorithm(*,
         print('=== Initial population ===')
         print_list_vertically(population)
 
+    #
+
     # Emulate do-wihle loop
     # https://coderwall.com/p/q_rd1q/emulate-do-while-loop-in-python
     loop_counter = 0
     while (calc_exit(population) == True):
         loop_counter += 1
+
+        #
 
         # Calculate fitness
         for individual in population:
@@ -100,8 +107,6 @@ def run_genetic_algorithm(*,
             decrypted_text_guess = decrypt_function(encrypted_text, key_guess)
             fitness = fitness_function(plain_text, decrypted_text_guess)
             individual[1] = fitness
-
-        #
 
         population = get_sorted(population)
         if verbose:
@@ -123,7 +128,15 @@ def run_genetic_algorithm(*,
         #
 
         # Crossover
-        child1, child2 = crossover(parent1, parent2, crossover_location)
+        child1, child2 = crossover_single_point(parent1, parent2,
+                                                crossover_location=4)
+        # I also saw the following:
+        #
+        #     child1, child2 = crossover_single_point(parent1, parent2,
+        #                                             crossover_location=random.randint(2,6))
+        #
+        # Splitting the chromosome at random location is a greate idea and
+        # definately worth eploring.
         if verbose:
             print()
             print('=== Children from crossover ===')
@@ -133,7 +146,7 @@ def run_genetic_algorithm(*,
         #
 
         # Mutation
-        mutated_child = mutate(child1, mutation_round)
+        mutated_child = mutate(child1, mutation_round=2)
         if verbose:
             print()
             print('=== Mutated chromosome ===')
@@ -152,10 +165,12 @@ def run_genetic_algorithm(*,
             print()
             print('=== Population after repalcing weak chromosome ===')
             print_list_vertically(population)
+            print()
 
         #
 
-        print("Iteration:", loop_counter, "Best Fitness:", population[-1][1])
+        print("End of iteration:", loop_counter, "\t\t",
+              "Best Fitness:", population[-1][1])
 
         #
 
