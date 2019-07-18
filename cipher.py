@@ -61,12 +61,13 @@ def strEncrypt(text, key):
 	return text_to_return
 
 def intListDecrypt(text, key):
-	'''
-	This method decrypts (shifts) the text by iterating through an integer list
-	'''
-	decrypted = ""
-	for letter, shift in zip(text, itertools.cycle(key)):
-		decrypted += decryptShiftLetter(letter,shift)
+    '''
+    This method decrypts (shifts) the text by iterating through an integer list
+    '''
+    decrypted = ""
+    for letter, shift in zip(text, itertools.cycle(key)):
+        decrypted += decryptShiftLetter(letter,shift)
+    print(decrypted)
 
 	return decrypted
 
@@ -80,13 +81,13 @@ def intListEncrypt(text, key):
 	return encrypted
 
 def intDecrypt(text, key):
-	'''
-	This method decrypts (shifts) the text by a constant amount for each letter
-	'''
-	shift = key
-	decrypted = ""
-	for letter in text:
-		decrypted += decryptShiftLetter(letter,shift)
+    '''
+    This method decrypts (shifts) the text by a constant amount for each letter
+    '''
+    shift = key
+    decrypted = ""
+    for letter in text:
+        decrypted += decryptShiftLetter(letter,shift)
 
 	return decrypted
 
@@ -112,23 +113,23 @@ def decryptShiftLetter(letter, shift):
 	return letter
 
 def encryptShiftLetter(letter, shift):
-	'''
-	Shifts a letter by the specified amount
-	'''
-	if(ord(letter) >= 65 and ord(letter) <= 90):
-		letter = letter.lower()
-	if(ord(letter) >= 97 and ord(letter) <= 122):
-		letter = charToIntASCII(letter)
-		letter += shift
-		letter = intToCharASCII(letter)
-	return letter
+    '''
+    Shifts a letter by the specified amount
+    '''
+    if(ord(letter) >= 65 and ord(letter) <= 90):
+        letter = letter.lower()
+    if(ord(letter) >= 97 and ord(letter) <= 122):
+        letter = charToIntASCII(letter)
+        letter += shift
+        letter = intToCharASCII(letter)
+    return letter
 
 def charToIntASCII(letter):
-	'''
-	Shift letters to a=0, b=1, c=2 ... z=25 if LETTER_SHIFT == 97
-	returns a number
-	'''
-	return ord(letter) - LETTER_SHIFT
+    '''
+    Shift letters to a=0, b=1, c=2 ... z=25 if LETTER_SHIFT == 97
+    returns a number
+    '''
+    return ord(letter) - LETTER_SHIFT
 
 def intToCharASCII(letter):
 	'''
