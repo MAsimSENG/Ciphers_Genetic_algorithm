@@ -103,6 +103,16 @@ def run_genetic_algorithm(*,
 
         # Calculate fitness
         for individual in population:
+
+            # For optimization:
+            # As the list is sorted, chromosomes with fitness of
+            # FITNESS_OF_NEW_CHROMOSOME (i.e. -1) will be in the begining of
+            # the list. And as this for loop is linear, there is no need
+            # to recalculate the fitness of chromosomes that already has
+            # a value other than FITNESS_OF_NEW_CHROMOSOME.
+            if individual[1] != -1:
+                break
+
             key_guess = individual[0]
             decrypted_text_guess = decrypt_function(encrypted_text, key_guess)
             fitness = fitness_function(plain_text, decrypted_text_guess)
