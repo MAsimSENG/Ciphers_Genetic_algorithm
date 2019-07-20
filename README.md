@@ -1,6 +1,7 @@
 # Ciphers and Genetic Algorithm
 
-Using genetic algorithm to break ciphers
+Using Genetic Algorithm (GA) to break ciphers and find the key used to encrypte
+a message.
 
 
 
@@ -33,7 +34,7 @@ Operational modes:
 $ python driver.py --dev
 ```
 
-Expected sample output:
+Expected sample output (with default verbosity of 1):
 
 ```
 End of iteration: 1 		 Best Fitness: 31.670175244226233
@@ -108,7 +109,33 @@ Key: quacktim
 
 ### Experiment
 
-TODO @arshi
+Run an experiment using the `--experiment` (or `e`) argument. This will run the
+GA for `n` iterations. At each iteration, the number of generations is
+recorded. At the end of the experiment, results are reported. Results include:
+mean, variance, and standard deviation.
+
+```
+$ python driver.py -e 5
+```
+
+Expected sample output (with default verbosity of 1):
+
+```
+Experiment: 0 		 Number of generation: 1339
+Experiment: 1 		 Number of generation: 3147
+Experiment: 2 		 Number of generation: 5127
+Experiment: 3 		 Number of generation: 1350
+Experiment: 4 		 Number of generation: 612
+=== Stats Summary ===
+n =  5
+Mean: 2315.0
+Var: 2676715.6
+StDev: 1636.067113537828
+```
+
+Verbose level 0 will simply show the Stats Summary at the end of execution.
+Verbosity of 2 will show the list containing number of generation across all
+experiments.
 
 
 
