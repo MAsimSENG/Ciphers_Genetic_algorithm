@@ -84,9 +84,9 @@ def run_genetic_algorithm(*,
                           decrypt_function,
                           population,
                           fitness_function,
-                          verbose=False):
+                          verbose=1):
 
-    if verbose:
+    if verbose == 2:
         print()
         print('=== Initial population ===')
         print_list_vertically(population)
@@ -119,7 +119,7 @@ def run_genetic_algorithm(*,
             individual[1] = fitness
 
         population = get_sorted(population)
-        if verbose:
+        if verbose == 2:
             print()
             print('=== After fitness calculation and sort ===')
             print_list_vertically(population)
@@ -129,7 +129,7 @@ def run_genetic_algorithm(*,
         # Selection
         parent1 = population[-1][0]  # get last chromosome in the list
         parent2 = population[-2][0]  # get 2nd last chromosome in the list
-        if verbose:
+        if verbose == 2:
             print()
             print('=== Parents for crossover ===')
             print(parent1)
@@ -147,7 +147,7 @@ def run_genetic_algorithm(*,
         #
         # Splitting the chromosome at random location is a greate idea and
         # definately worth eploring.
-        if verbose:
+        if verbose == 2:
             print()
             print('=== Children from crossover ===')
             print(child1)
@@ -157,7 +157,7 @@ def run_genetic_algorithm(*,
 
         # Mutation
         mutated_child = mutate(child1, mutation_round=2)
-        if verbose:
+        if verbose == 2:
             print()
             print('=== Mutated chromosome ===')
             print(mutated_child)
@@ -171,20 +171,19 @@ def run_genetic_algorithm(*,
 
         #
 
-        if verbose:
+        if verbose == 2:
             print()
             print('=== Population after repalcing weak chromosome ===')
             print_list_vertically(population)
             print()
 
-        #
-
-        print("End of iteration:", loop_counter, "\t\t",
-              "Best Fitness:", population[-1][1])
+        if verbose >= 1:
+            print("End of iteration:", loop_counter, "\t\t",
+                  "Best Fitness:", population[-1][1])
 
         #
 
     # After the loop. I.e. break condition met.
     found_key = population[-1][0]  # Last chromosome in population
 
-    return found_key
+    return found_key, loop_counter
