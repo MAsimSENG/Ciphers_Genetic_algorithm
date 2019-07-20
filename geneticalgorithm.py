@@ -186,4 +186,4 @@ def run_genetic_algorithm(*,
     # After the loop. I.e. break condition met.
     found_key = population[-1][0]  # Last chromosome in population
 
-    return found_key
+    return found_key, loop_counter

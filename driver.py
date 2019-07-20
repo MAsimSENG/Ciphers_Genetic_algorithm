@@ -2,6 +2,7 @@ import argparse
 import cipher
 import euclidean as euclid
 import geneticalgorithm as ga
+import numpy as np
 import random
 import sys
 
@@ -33,10 +34,10 @@ def main():
     # https://docs.python.org/2/howto/argparse.html
     parser.add_argument('--dev',
                         action='store_true',
-                        help='Run GA to completion only once')
+                        help='Run the GA to completion only once')
 
     parser.add_argument('-e', '--experiment',
-                        help='Run GA for specified iterations to collect statistics',
+                        help='Run the GA for specified iterations to collect statistics',
                         type=int)
 
     parser.add_argument('-v', '--verbosity',
@@ -59,13 +60,42 @@ def main():
     if args.dev:
         trial_run(args.verbosity)
     elif args.experiment is not None:
-        run_experiment(args.experiment)
+        run_experiment(args.experiment, args.verbosity)
 
 
-def run_experiment(iterations):
-    # TODO @arshi
-    print('Unimplemented. Iterations:', iterations)
-    pass
+def run_experiment(iterations, verbosity):
+
+    if verbosity is None:
+        verbosity = 1
+
+    results = np.array([])
+
+    for n in range(iterations):
+        unused, num_of_gens = ga.run_genetic_algorithm(plain_text=__plain_text,
+                                                       encrypted_text=__encrypted_text,
+                                                       decrypt_function=cipher.decrypt,
+                                                       population=__population,
+                                                       fitness_function=euclid.euclideanDistance,
+                                                       verbose=0
+                                                       )
+
+        results = np.append(results, num_of_gens)
+
+        if verbosity >= 1:
+            print('Experiment:', n, '\t\t',
+                  'Number of generation:', num_of_gens)
+
+    #
+
+    # Calculate stats and report
+    print('=== Stats Summary ===')
+    print('n = ', iterations)
+    print('Mean:', np.mean(results))
+    print('Var:', np.var(results))
+    print('StDev:', np.std(results))
+
+    if verbosity == 2:
+        print(results)
 
 
 def trial_run(verbosity):
