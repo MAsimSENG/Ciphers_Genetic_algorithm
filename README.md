@@ -8,9 +8,26 @@ a message.
 ## Requirements
 
 - Python 3
+- Libraries:
+    - NumPy
 
 
+## Run
 
+To see a demo, run the following command:
+
+```
+$ python driver.py --dev
+```
+
+To see more outputs, run the following command:
+
+```
+$ python driver.py --dev -v 2
+```
+
+
+---
 
 
 ## Usage
