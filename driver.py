@@ -111,7 +111,9 @@ def trial_run(verbosity):
                                          verbose=verbosity
                                          )
 
-    print("Key:", found_key)
+    print()
+    print("Key Found:", found_key[0])
+    print("Num of Generations:", found_key[1])
 
 
 if __name__ == "__main__":

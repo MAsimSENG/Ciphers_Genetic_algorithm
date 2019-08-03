@@ -17,6 +17,7 @@ def get_sorted(list):
 def get_random_char():
     return chr(random.randint(97, 122))
 
+
 def crossover_k_point(parent1, parent2, crossover):
     '''
     This method takes two parents (strings) and crossover (integer).
@@ -97,7 +98,7 @@ def run_genetic_algorithm(*,
 
     #
 
-    # Emulate do-wihle loop
+    # Emulate while loop
     # https://coderwall.com/p/q_rd1q/emulate-do-while-loop-in-python
     loop_counter = 0
     while (calc_exit(population) == True):
@@ -143,15 +144,9 @@ def run_genetic_algorithm(*,
 
         # Crossover
         # Change k value to crossover every k characters
-        k=random.randint(1,10)
-        child1,child2=crossover_k_point(parent1, parent2, k)
-        # I also saw the following:
-        #
-        #     child1, child2 = crossover_single_point(parent1, parent2,
-        #                                             crossover_location=random.randint(2,6))
-        #
-        # Splitting the chromosome at random location is a greate idea and
-        # definately worth eploring.
+        k = random.randint(1,10)
+        child1, child2 = crossover_k_point(parent1, parent2, k)
+        
         if verbose == 2:
             print()
             print('=== Children from crossover ===')
