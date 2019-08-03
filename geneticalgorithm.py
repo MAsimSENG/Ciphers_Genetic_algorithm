@@ -17,29 +17,33 @@ def get_sorted(list):
 def get_random_char():
     return chr(random.randint(97, 122))
 
-
-def crossover_single_point(parent1, parent2, crossover_location=0):
+def crossover_k_point(parent1, parent2, crossover):
     '''
-    This method takes two parents (strings) and returns two children (strings).
-    The children are a combination of the parents as long as the string length
-    is greater than 1. When the string length = 1, the children are a copy of
-    the parent.
+    This method takes two parents (strings) and crossover (integer).
+    This method returns two children (strings).
+    The children are a combination of the parents. How the child is formed
+    is dictated by value of crossover.
     '''
-    if crossover_location == 0 or crossover_location > len(parent1):
-        crossover_location = int(len(parent1) / 2)
+    child1=parent1[:crossover]
+    child2=parent2[:crossover]
+    i=1
+    while(crossover*i<len(parent1)):
+        if(i%2==0):
+            child1=child1+parent1[crossover*i:crossover*(i+1)]
+            child2=child2+parent2[crossover*i:crossover*(i+1)]
+        else:
+            child1=child1+parent2[crossover*i:crossover*(i+1)]
+            child2=child2+parent1[crossover*i:crossover*(i+1)]
+        i+=1
 
-    child1 = parent1[:crossover_location] + \
-        parent2[crossover_location:len(parent2)]
-
-    child2 = parent2[:crossover_location] + \
-        parent1[crossover_location:len(parent1)]
+    if(i%2==0):
+        child1=child1+parent1[crossover*i:crossover*(i+1)]
+        child2=child2+parent2[crossover*i:crossover*(i+1)]
+    else:
+        child1=child1+parent2[crossover*i:crossover*(i+1)]
+        child2=child2+parent1[crossover*i:crossover*(i+1)]
 
     return child1, child2
-
-
-def crossover_k_point(parent1, parent2):
-    # TODO @rafay. Feel free to change the name, arguments, etc.
-    return None
 
 
 def mutate(chromosome, mutation_round=2):
@@ -138,8 +142,9 @@ def run_genetic_algorithm(*,
         #
 
         # Crossover
-        child1, child2 = crossover_single_point(parent1, parent2,
-                                                crossover_location=4)
+        # Change k value to crossover every k characters
+        k=random.randint(1,10)
+        child1,child2=crossover_k_point(parent1, parent2, k)
         # I also saw the following:
         #
         #     child1, child2 = crossover_single_point(parent1, parent2,
